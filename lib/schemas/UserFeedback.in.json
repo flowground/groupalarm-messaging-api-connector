@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "FeedbackRequest is used to set the feedback using the API",
+            "type": "object",
+            "required": [
+                "response",
+                "userID",
+                "alarmID"
+            ],
+            "properties": {
+                "alarmID": {
+                    "description": "AlarmID associated to the feedback",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "AlarmID"
+                },
+                "response": {
+                    "description": "Response should be `true` if the user gave positive feedback and `false` if not",
+                    "type": "boolean",
+                    "x-go-name": "Response"
+                },
+                "userID": {
+                    "description": "UserID of the user that is sending this feedback",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UserID"
+                }
+            },
+            "x-go-package": "groupalarm.com/go/messaging/api/handler"
+        }
+    }
+}

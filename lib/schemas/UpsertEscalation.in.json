@@ -1,0 +1,54 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "Definition of an escalation configuration payload",
+            "type": "object",
+            "required": [
+                "escalations"
+            ],
+            "properties": {
+                "escalations": {
+                    "description": "configured escalations",
+                    "type": "array",
+                    "items": {
+                        "description": "Definition of a single escalation",
+                        "type": "object",
+                        "required": [
+                            "wayofalarm",
+                            "delay"
+                        ],
+                        "properties": {
+                            "delay": {
+                                "description": "configured delay in seconds, when escalation is used after the last one",
+                                "type": "integer",
+                                "format": "int64",
+                                "x-go-name": "Delay"
+                            },
+                            "wayofalarm": {
+                                "description": "type of the alarming way e.g. email",
+                                "type": "string",
+                                "x-go-name": "WayOfAlarm"
+                            }
+                        },
+                        "x-go-package": "groupalarm.com/go/messaging/api/services"
+                    },
+                    "x-go-name": "Escalations"
+                },
+                "organizationID": {
+                    "description": "organization id for editing escalation as an organization administrator",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "OrganizationID"
+                },
+                "userID": {
+                    "description": "assigned user for this escalation configuration for organization administrator editing",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UserID"
+                }
+            },
+            "x-go-package": "groupalarm.com/go/messaging/api/services"
+        }
+    }
+}

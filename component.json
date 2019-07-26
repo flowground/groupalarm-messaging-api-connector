@@ -1,0 +1,112 @@
+{
+    "title": "groupalarm Messaging API",
+    "description": "The messaging service implements all functions for message-management in GroupAlarm\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->",
+    "docsUrl": "",
+    "url": "https://app.groupalarm.com/api/v1",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://app.groupalarm.com/api/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "auth_API_Token": {
+                "label": "API-TOKEN (API_Token)",
+                "viewClass": "TextFieldView",
+                "note": "To use this API, you need an API-Token from the RBAC settings of your GroupAlarm organization. Place the token inside the HTTP-Header `API-Token` for every request, otherwise the API will return an \"401 Unauthorized\" error for your request."
+            },
+            "auth_Personal-Access-Token": {
+                "label": "Personal-Access-Token (Personal-Access-Token)",
+                "viewClass": "TextFieldView",
+                "note": "To use this API, you need a Personal Access Token from your profile settings. Place the token inside the HTTP-Header `Personal-Access-Token` for every request, otherwise the API will return an \"401 Unauthorized\" error for your request."
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "UpsertEscalation": {
+            "main": "./lib/actions/UpsertEscalation.js",
+            "title": "UpsertEscalation",
+            "description": "Creates or updates an existing escalation configuration for the passed user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpsertEscalation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetEscalation": {
+            "main": "./lib/actions/GetEscalation.js",
+            "title": "GetEscalation",
+            "description": "Returns the escalation configuration for the passed user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetEscalation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetAlarmMessageStatus": {
+            "main": "./lib/actions/GetAlarmMessageStatus.js",
+            "title": "GetAlarmMessageStatus",
+            "description": "Returns the current alarm message status for the user in the given alarm",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetAlarmMessageStatus.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UserFeedback": {
+            "main": "./lib/actions/UserFeedback.js",
+            "title": "UserFeedback",
+            "description": "Sets the user feedback for a specific alarm using the api",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UserFeedback.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
